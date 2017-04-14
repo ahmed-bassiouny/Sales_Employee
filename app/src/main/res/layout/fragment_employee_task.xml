@@ -1,0 +1,49 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:weightSum="10">
+
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_weight="10">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:layout_centerInParent="true"/>
+
+     </LinearLayout>
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_gravity="center"
+       android:gravity="center"
+       android:layout_weight="1">
+
+    <com.kyleduo.switchbutton.SwitchButton
+        android:id="@+id/startStopservice"
+        style="@style/SwitchButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:kswAnimationDuration="300"
+        app:kswBackDrawable="@drawable/ios_back_drawable"
+        app:kswBackMeasureRatio="1.7"
+        app:kswThumbDrawable="@drawable/ios_thumb_selector"
+        app:kswThumbMarginBottom="-10dp"
+        app:kswThumbMarginLeft="-5dp"
+        app:kswThumbMarginRight="-5dp"
+        app:kswThumbMarginTop="-5dp"
+        app:kswTextOn="Start"
+        app:kswTextOff="Stop"/>
+
+   </LinearLayout>
+
+
+</LinearLayout>

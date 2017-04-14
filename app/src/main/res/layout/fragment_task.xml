@@ -1,0 +1,146 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="pharmaproject.ahmed.example.packagecom.pharmaproject_employee.task">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:orientation="vertical"
+        android:layout_weight="5"
+        android:background="@drawable/border">
+
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/scrollInfo"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:padding="3dp"
+            android:apiKey="AIzaSyCiAhY_2fey0r0mo1N6m8jcGrKkgWpPR6U" />
+
+
+        <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="3dp">
+
+            <EditText
+                android:id="@+id/Doc_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/roundedittext"
+                android:drawableLeft="@drawable/ph_person"
+                android:drawablePadding="10dp"
+                android:hint="Doctor Name"
+                android:padding="10dp" />
+
+
+            <EditText
+
+                android:id="@+id/Address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/roundedittext"
+                android:drawableLeft="@drawable/ph_location"
+                android:drawablePadding="10dp"
+                android:focusable="false"
+                android:hint="Location"
+                android:padding="10dp" />
+
+
+            <EditText
+
+                android:id="@+id/Task_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginLeft="-18dp"
+                android:background="@drawable/roundedittext"
+                android:drawableLeft="@drawable/ph_time"
+                android:drawablePadding="10dp"
+                android:focusable="false"
+                android:hint="23-03-2017 11:30 AM"
+                android:padding="10dp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <SeekBar
+                    android:id="@+id/typetaskbar"
+                    style="@style/Widget.AppCompat.SeekBar.Discrete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="3"
+                    android:progress="0" />
+
+                <TextView
+                    android:id="@+id/typetasktxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="in complete" />
+            </LinearLayout>
+
+
+            <EditText
+
+                android:id="@+id/Task_Desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginLeft="-20dp"
+                android:background="@drawable/roundedittext"
+                android:drawableLeft="@drawable/ph_description"
+                android:drawablePadding="10dp"
+                android:enabled="false"
+                android:hint="Task Description"
+                android:inputType="textMultiLine"
+                android:padding="10dp" />
+
+
+        </LinearLayout>
+    </ScrollView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:background="@drawable/border"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <ImageView
+            android:id="@+id/prepare_endtask"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:saveEnabled="false"
+            android:src="@drawable/ph_preparing"
+            android:tag="prepare"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/feedback"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:saveEnabled="false"
+            android:src="@drawable/ph_feedback" />
+    </LinearLayout>
+
+
+</LinearLayout>

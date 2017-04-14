@@ -1,0 +1,71 @@
+Index: gradle/wrapper/gradle-wrapper.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>windows-1256
+===================================================================
+--- gradle/wrapper/gradle-wrapper.properties	(revision eb02e9b3b39ba67a23ca78eadbaa12ab8b993161)
++++ gradle/wrapper/gradle-wrapper.properties	(revision )
+@@ -1,6 +1,6 @@
+-#Mon Dec 28 10:00:20 PST 2015
++#Thu Mar 30 01:31:37 EET 2017
+ distributionBase=GRADLE_USER_HOME
+ distributionPath=wrapper/dists
+ zipStoreBase=GRADLE_USER_HOME
+ zipStorePath=wrapper/dists
+-distributionUrl=https\://services.gradle.org/distributions/gradle-2.14.1-all.zip
++distributionUrl=https\://services.gradle.org/distributions/gradle-3.3-all.zip
+Index: build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- build.gradle	(revision eb02e9b3b39ba67a23ca78eadbaa12ab8b993161)
++++ build.gradle	(revision )
+@@ -5,7 +5,7 @@
+         jcenter()
+     }
+     dependencies {
+-        classpath 'com.android.tools.build:gradle:2.2.3'
++        classpath 'com.android.tools.build:gradle:2.3.0'
+ 
+         // NOTE: Do not place your application dependencies here; they belong
+         // in the individual module build.gradle files
+@@ -16,6 +16,7 @@
+ allprojects {
+     repositories {
+         jcenter()
++        mavenCentral()
+     }
+ }
+ 
+Index: app/src/main/java/pharmaproject/ahmed/example/packagecom/pharmaproject_employee/ListOfTasks.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/pharmaproject/ahmed/example/packagecom/pharmaproject_employee/ListOfTasks.java	(revision eb02e9b3b39ba67a23ca78eadbaa12ab8b993161)
++++ app/src/main/java/pharmaproject/ahmed/example/packagecom/pharmaproject_employee/ListOfTasks.java	(revision )
+@@ -80,6 +80,7 @@
+         recyclerView.setHasFixedSize(true);
+         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+         recyclerView.setLayoutManager(mLayoutManager);
++        // get tasks for recycler view
+         new Task().getTasks(recyclerView,getActivity(),Email, MyHelper.getProgress(getActivity()));
+ 
+     }
+Index: app/src/main/java/pharmaproject/ahmed/example/packagecom/pharmaproject_employee/SendLatLong.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/pharmaproject/ahmed/example/packagecom/pharmaproject_employee/SendLatLong.java	(revision eb02e9b3b39ba67a23ca78eadbaa12ab8b993161)
++++ app/src/main/java/pharmaproject/ahmed/example/packagecom/pharmaproject_employee/SendLatLong.java	(revision )
+@@ -43,7 +43,7 @@
+     @Override
+     public int onStartCommand(Intent intent,int flags, int startId) {
+ 
+-      Email = Utils.EmailAdress.replace(".","*");
++        Email = Utils.EmailAdress.replace(".","*");
+         time =intent.getIntExtra("TIME",5);
+ 
+         database = FirebaseDatabase.getInstance();
