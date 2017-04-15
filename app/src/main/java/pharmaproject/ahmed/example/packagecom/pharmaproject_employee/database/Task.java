@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -41,6 +42,7 @@ import pharmaproject.ahmed.example.packagecom.pharmaproject_employee.helper.Util
 import pharmaproject.ahmed.example.packagecom.pharmaproject_employee.helper.MyHelper;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -131,7 +133,10 @@ public class Task {
                     }
                 }
                 if(tasks.size()>0){
-                    Adapter_Tasks adapter_tasks = new Adapter_Tasks(tasks,fragmentActivity,email);
+
+
+
+                    Adapter_Tasks adapter_tasks = new Adapter_Tasks(SortTaskbyDate(tasks),fragmentActivity,email);
                     recyclerView.setItemAnimator(new DefaultItemAnimator());
                     recyclerView.setAdapter(adapter_tasks);
                 }else{
@@ -240,6 +245,41 @@ public class Task {
     }
     private DatabaseReference getRoot(){
         return Information.getDatabase().child("Supervisor").child(Utils.parentName).child(Utils.EmailAdress.replace(".", "*"));
+    }
+
+    public ArrayList<Task>SortTaskbyDate(ArrayList<Task>task)
+    {
+
+
+
+        for (int j= 0 ;j<(task.size()-1);j++) {
+            for (int i = 0; i < task.size() - 1; i++)
+
+            {
+
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-mm-yyyy hh:mm ");
+                try {
+                    if (sdf.parse(task.get(i).time_task.toString()).after(sdf.parse(task.get(i + 1).time_task.toString())))
+
+                    {
+                        Task temp = new Task();
+
+                        temp = task.get(i + 1);
+                        task.set(i + 1, task.get(i));
+                        task.set(i, temp);
+                    }
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+
+
+            }
+        }
+
+
+        return task ;
     }
 
 }
