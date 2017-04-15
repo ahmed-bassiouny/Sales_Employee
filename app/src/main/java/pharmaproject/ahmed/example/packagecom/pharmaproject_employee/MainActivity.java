@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import io.fabric.sdk.android.Fabric;
 import pharmaproject.ahmed.example.packagecom.pharmaproject_employee.database.Information;
+import pharmaproject.ahmed.example.packagecom.pharmaproject_employee.database.SortType;
 import pharmaproject.ahmed.example.packagecom.pharmaproject_employee.helper.Utils;
 
 public class MainActivity extends AppCompatActivity {
@@ -50,11 +52,25 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-        if(item.getItemId()==R.id.signout){
-            createdialog();
+        switch (item.getItemId())
+        {
+            case R.id.signout:
+            {
+                createdialog();
+            }
+            case R.id.sortbycomplete:
+            {
+                SortType sortType = SortType.complete;
+                //utils.goToFragment(new ListOfTasks(),null,null);
+                Toast.makeText(this, ""+sortType, Toast.LENGTH_SHORT).show();
+            }
 
         }
+
+//        if(item.getItemId()==R.id.signout){
+//            createdialog();
+//
+//        }
         return super.onOptionsItemSelected(item);
     }
 

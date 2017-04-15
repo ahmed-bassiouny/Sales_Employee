@@ -56,7 +56,7 @@ public class SendLatLong extends Service {
             @Override
             public void onLocationChanged(final Location location) {
                 Log.i("****","lat/lng: (" + location.getLatitude() + "," + location.getLongitude() + ")");
-                Information.getDatabase().child("Supervisor").child(Parent).child(Email.replace(".", "*")).child("lastLocation")
+                Information.getDatabase().child("Supervisor").child(Parent).child(/*Email.replace(".", "*")*/Utils.EmailAdress).child("lastLocation")
                         .setValue("lat/lng: (" + location.getLatitude() + "," + location.getLongitude() + ")");
 
             }
@@ -87,7 +87,7 @@ public class SendLatLong extends Service {
         locationManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
         //noinspection MissingPermission
         //(java.util.concurrent.TimeUnit.MINUTES.toMillis(Utils.timeTracking))
-        locationManager.requestLocationUpdates(locationManager.GPS_PROVIDER, (java.util.concurrent.TimeUnit.MINUTES.toMillis(time)), 0, locationListener);
+        locationManager.requestLocationUpdates(locationManager.NETWORK_PROVIDER, (java.util.concurrent.TimeUnit.MINUTES.toMillis(time)), 0, locationListener);
     }
 
 

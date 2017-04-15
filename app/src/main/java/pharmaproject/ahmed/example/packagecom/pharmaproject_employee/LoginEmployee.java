@@ -45,12 +45,12 @@ public class LoginEmployee extends Fragment implements View.OnClickListener {
         utils = new Utils(getActivity());
 
         email = (EditText) view.findViewById(R.id.email);
-        password = (EditText) view.findViewById(R.id.password);
+        //password = (EditText) view.findViewById(R.id.password);
         signin = (Button) view.findViewById(R.id.signin);
         ip= (Button) view.findViewById(R.id.ip);
 
         email.setTypeface(Utils.getFont(getActivity()));
-        password.setTypeface(Utils.getFont(getActivity()));
+      //  password.setTypeface(Utils.getFont(getActivity()));
         signin.setTypeface(Utils.getFont(getActivity()));
         ip.setTypeface(Utils.getFont(getActivity()));
 
@@ -94,6 +94,7 @@ public class LoginEmployee extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
 
         signinfakeaccount();
+
     }
 
 
@@ -101,9 +102,9 @@ public class LoginEmployee extends Fragment implements View.OnClickListener {
 
         final String emailDa = email.getText().toString();
 
-        final String passwordDa = password.getText().toString().trim();
+      //  final String passwordDa = password.getText().toString().trim();
 
-        if (emailDa.isEmpty() || passwordDa.isEmpty()) {
+        if (emailDa.isEmpty() /*|| passwordDa.isEmpty()*/) {
             Toast.makeText(getActivity(), "please enter valid mail", Toast.LENGTH_SHORT).show();
         } else {
             final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), "Please Wait", "", true, false);
@@ -115,13 +116,14 @@ public class LoginEmployee extends Fragment implements View.OnClickListener {
 
                         String parent = childDataSnapshot.getKey().toString();
 
-                        if (childDataSnapshot.hasChild(emailDa.replace(".", "*"))) {
+                        if (/*childDataSnapshot.hasChild(emailDa.replace(".", "*"))*/childDataSnapshot.hasChild(getIPAndroid())) {
                             String parentname = parent;
-                            if (dataSnapshot.child("Supervisor").child(parentname).child(emailDa.replace(".", "*")).child("password").getValue().toString().equals(passwordDa)&&
-                                    dataSnapshot.child("Supervisor").child(parentname).child(emailDa.replace(".", "*")).child("IMEI").getValue().equals(getIPAndroid()))
+                            if (/*dataSnapshot.child("Supervisor").child(parentname).child(emailDa.replace(".", "*")).child("password").getValue().toString().equals(passwordDa)&&*/
+                                  /*  dataSnapshot.child("Supervisor").child(parentname).child(emailDa.replace(".", "*")).child("IMEI").getValue().equals(getIPAndroid())*/
+                                    dataSnapshot.child("Supervisor").child(parentname).child(getIPAndroid()).child("email").getValue().equals(emailDa)  )
                             {
                                 Utils.parentName = parentname;
-                                Utils.EmailAdress = emailDa;
+                                Utils.EmailAdress =getIPAndroid() /*emailDa*/;
 
                                 utils.goToFragment(new ListOfTasks(), null, null);
                                 loged(Utils.EmailAdress,Utils.parentName);

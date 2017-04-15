@@ -37,21 +37,22 @@
                 android:drawableLeft="@drawable/ph_email"
                 android:hint="@string/email"
                 android:inputType="textEmailAddress"
-                android:paddingLeft="10dp" />
+                android:paddingLeft="10dp"
+                android:layout_marginBottom="100dp"/>
 
-            <EditText
-                android:id="@+id/password"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/roundedittext"
-                android:drawableLeft="@drawable/ic_action_name"
-                android:hint="@string/password"
-                android:drawablePadding="10dp"
-                android:inputType="textPassword"
-                android:paddingLeft="10dp" />
+            <!--<EditText-->
+                <!--android:id="@+id/password"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="40dp"-->
+                <!--android:layout_marginLeft="20dp"-->
+                <!--android:layout_marginRight="20dp"-->
+                <!--android:layout_marginTop="20dp"-->
+                <!--android:background="@drawable/roundedittext"-->
+                <!--android:drawableLeft="@drawable/ic_action_name"-->
+                <!--android:hint="@string/password"-->
+                <!--android:drawablePadding="10dp"-->
+                <!--android:inputType="textPassword"-->
+                <!--android:paddingLeft="10dp" />-->
 
             <Button
                 android:id="@+id/signin"
