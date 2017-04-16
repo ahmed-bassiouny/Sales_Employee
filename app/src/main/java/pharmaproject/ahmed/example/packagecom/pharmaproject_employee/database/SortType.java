@@ -6,5 +6,5 @@ package pharmaproject.ahmed.example.packagecom.pharmaproject_employee.database;
 
 public enum SortType {
 
-    timeoftask, complete, incomplete;
+     complete, incomplete,processing,on_the_way;
 }

@@ -15,5 +15,16 @@
     <string name="lastlocation_Em_pro">Last location</string>
     <string name="Rate_Em_pro">Rate</string>
 
+    <string-array name="sorttype">
+        <item>Filter</item>
+        <item>complete</item>
+        <item>incomplete</item>
+        <item>proceesing</item>
+        <item>on The Way</item>
+
+
+
+    </string-array>
+
 
 </resources>

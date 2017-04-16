@@ -10,6 +10,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -121,7 +122,7 @@ public class Task {
         getRoot().child(id_task+"").child("rateforDoctor").setValue(rateofdoctor);
     }
 
-    public void getTasks(final RecyclerView recyclerView,final FragmentActivity fragmentActivity, final String email, final ProgressDialog progressDialog){
+    public void getTasks(final RecyclerView recyclerView, final FragmentActivity fragmentActivity, final String email, final ProgressDialog progressDialog, @Nullable final SortType sorttype,final TextView noTeskfound){
         ValueEventListener postListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -129,18 +130,72 @@ public class Task {
                 for(DataSnapshot dss:dataSnapshot.child("Supervisor").child(Utils.parentName).child(email).getChildren()){
                     if(dss.hasChildren()) {
                         Task task = dss.getValue(Task.class);
-                        tasks.add(task);
+
+
+                        if(sorttype !=null)
+
+                        {
+                            switch (sorttype) {
+                                case complete: {
+                                    if (task.taskType==TaskType.COMPLETE)
+                                    {
+
+                                        tasks.add(task);
+                                    }
+                                    break;
+
+                                }
+
+                                case incomplete:
+                                {
+                                    if (task.taskType==TaskType.INCOMPLETE)
+                                    {
+                                        tasks.add(task);
+                                    }
+                                    break;
+
+                                }
+
+                                case processing:
+                                {
+                                    if (task.taskType==TaskType.PROCESSING)
+                                    {
+                                        tasks.add(task);
+                                    }
+                                    break;
+
+                                }
+
+                                case on_the_way:
+                                {
+                                    if (task.taskType==TaskType.On_The_Way)
+                                    {
+                                        tasks.add(task);
+                                    }
+                                    break;
+
+                                }
+
+                            }
+
+                        }
+
+                        else {
+                            tasks.add(task);
+                        }
                     }
                 }
                 if(tasks.size()>0){
 
-
-
+                        noTeskfound.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.VISIBLE);
                     Adapter_Tasks adapter_tasks = new Adapter_Tasks(SortTaskbyDate(tasks),fragmentActivity,email);
                     recyclerView.setItemAnimator(new DefaultItemAnimator());
                     recyclerView.setAdapter(adapter_tasks);
                 }else{
                     Debuger.Toast(fragmentActivity,"No Tasks Found");
+                    //noTeskfound.setVisibility(View.VISIBLE);
+                    recyclerView.setVisibility(View.GONE);
                 }
                 progressDialog.dismiss();
             }

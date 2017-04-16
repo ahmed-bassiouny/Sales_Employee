@@ -58,12 +58,12 @@ public class MainActivity extends AppCompatActivity {
             {
                 createdialog();
             }
-            case R.id.sortbycomplete:
-            {
-                SortType sortType = SortType.complete;
-                //utils.goToFragment(new ListOfTasks(),null,null);
-                Toast.makeText(this, ""+sortType, Toast.LENGTH_SHORT).show();
-            }
+//            case R.id.sortbycomplete:
+//            {
+//                SortType sortType = SortType.complete;
+//                //utils.goToFragment(new ListOfTasks(),null,null);
+//                Toast.makeText(this, ""+sortType, Toast.LENGTH_SHORT).show();
+//            }
 
         }
 
