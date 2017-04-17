@@ -38,6 +38,7 @@ import java.lang.reflect.Array;
 import pharmaproject.ahmed.example.packagecom.pharmaproject_employee.database.Information;
 import pharmaproject.ahmed.example.packagecom.pharmaproject_employee.database.SortType;
 import pharmaproject.ahmed.example.packagecom.pharmaproject_employee.database.Task;
+import pharmaproject.ahmed.example.packagecom.pharmaproject_employee.database.TaskType;
 import pharmaproject.ahmed.example.packagecom.pharmaproject_employee.helper.Utils;
 import pharmaproject.ahmed.example.packagecom.pharmaproject_employee.helper.MyHelper;
 
@@ -52,6 +53,9 @@ public class ListOfTasks extends Fragment implements AdapterView.OnItemSelectedL
     SwitchButton startStopService;
     Spinner filter ;
     TextView noTaskfound;
+    Task task;
+    ArrayAdapter<TaskType> adapter; // create adapter of tasktype
+    TaskType[] taskTypes; // create array of tasktype
 
 
 
@@ -65,6 +69,7 @@ public class ListOfTasks extends Fragment implements AdapterView.OnItemSelectedL
         startStopService= (SwitchButton) view.findViewById(R.id.startStopservice);
        filter =(Spinner) view.findViewById(R.id.spinner);
         noTaskfound= (TextView) view.findViewById(R.id.notaskfound);
+        taskTypes = TaskType.values(); // task type item to array
 
      //   filter.setAdapter();
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
@@ -238,49 +243,21 @@ public class ListOfTasks extends Fragment implements AdapterView.OnItemSelectedL
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
-        //adapterView.getItemAtPosition(i);
-        Task task = new Task();
-        switch (pos)
-        {
-            case 0:
 
-            {
-                task.getTasks(recyclerView,getActivity(),Email, MyHelper.getProgress(getActivity()),null,noTaskfound);
-                break;
-            }
-            case 1:
-
-            {
-         task.getTasks(recyclerView,getActivity(),Email, MyHelper.getProgress(getActivity()),SortType.complete,noTaskfound);
-                break;
-            }
-            case 2:
-            {
-                task.getTasks(recyclerView,getActivity(),Email, MyHelper.getProgress(getActivity()),SortType.incomplete,noTaskfound);
-                break;
-            }
-            case 3:
-            {
-
-                task.getTasks(recyclerView,getActivity(),Email, MyHelper.getProgress(getActivity()),SortType.processing,noTaskfound);
-                break;
-            }
-            case 4:
-            {
-
-                task.getTasks(recyclerView,getActivity(),Email, MyHelper.getProgress(getActivity()),SortType.on_the_way,noTaskfound);
-                break;
-            }
-
-
-        }
-
-
+        getData(taskTypes[pos]);
 
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+
+    private void getData(TaskType taskTypeselected){
+
+        if(task==null)
+            task=new Task();
+        task.getTasks(recyclerView,getActivity(), Email,MyHelper.getProgress(getActivity()),taskTypeselected,noTaskfound);
     }
 }

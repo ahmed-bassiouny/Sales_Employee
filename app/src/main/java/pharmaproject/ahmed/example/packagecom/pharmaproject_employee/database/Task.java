@@ -122,74 +122,31 @@ public class Task {
         getRoot().child(id_task+"").child("rateforDoctor").setValue(rateofdoctor);
     }
 
-    public void getTasks(final RecyclerView recyclerView, final FragmentActivity fragmentActivity, final String email, final ProgressDialog progressDialog, @Nullable final SortType sorttype,final TextView noTeskfound){
+    public void getTasks(final RecyclerView recyclerView, final FragmentActivity fragmentActivity, final String email, final ProgressDialog progressDialog, @Nullable final TaskType fiteroftasks,final TextView noTeskfound){
         ValueEventListener postListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 final ArrayList<Task> tasks = new ArrayList<>();
-                for(DataSnapshot dss:dataSnapshot.child("Supervisor").child(Utils.parentName).child(email).getChildren()){
+                for(DataSnapshot dss:dataSnapshot.getChildren()){
                     if(dss.hasChildren()) {
                         Task task = dss.getValue(Task.class);
 
+                        if(fiteroftasks==TaskType.All) {
 
-                        if(sorttype !=null)
+                            tasks.add(task);
+                        }else if(fiteroftasks==task.taskType){
 
-                        {
-                            switch (sorttype) {
-                                case complete: {
-                                    if (task.taskType==TaskType.COMPLETE)
-                                    {
-
-                                        tasks.add(task);
-                                    }
-                                    break;
-
-                                }
-
-                                case incomplete:
-                                {
-                                    if (task.taskType==TaskType.INCOMPLETE)
-                                    {
-                                        tasks.add(task);
-                                    }
-                                    break;
-
-                                }
-
-                                case processing:
-                                {
-                                    if (task.taskType==TaskType.PROCESSING)
-                                    {
-                                        tasks.add(task);
-                                    }
-                                    break;
-
-                                }
-
-                                case on_the_way:
-                                {
-                                    if (task.taskType==TaskType.On_The_Way)
-                                    {
-                                        tasks.add(task);
-                                    }
-                                    break;
-
-                                }
-
-                            }
-
-                        }
-
-                        else {
                             tasks.add(task);
                         }
+
+
                     }
                 }
                 if(tasks.size()>0){
 
                         noTeskfound.setVisibility(View.GONE);
                     recyclerView.setVisibility(View.VISIBLE);
-                    Adapter_Tasks adapter_tasks = new Adapter_Tasks(SortTaskbyDate(tasks),fragmentActivity,email);
+                    Adapter_Tasks adapter_tasks = new Adapter_Tasks(tasks,fragmentActivity,email);
                     recyclerView.setItemAnimator(new DefaultItemAnimator());
                     recyclerView.setAdapter(adapter_tasks);
                 }else{
@@ -207,7 +164,7 @@ public class Task {
                 progressDialog.dismiss();
             }
         };
-        Information.getDatabase().addValueEventListener(postListener);
+        Information.getDatabase().child("Supervisor").child(Utils.parentName).child(email).orderByChild("time_task").addValueEventListener(postListener);
     }
 
     public void getTask(final String email, final int task_id, final EditText Doc_name,
@@ -222,7 +179,6 @@ public class Task {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 final Task task = dataSnapshot.child("Supervisor").child(Utils.parentName).child(email).child(task_id+"").getValue(Task.class);
                 Doc_name.setText(task.doctorName);
-
                 if(!task.locationDoctor.isEmpty())
                 Address.setText(helper.getFullAddress(task.locationDoctor));
                 Task_time.setText(task.time_task);
@@ -302,39 +258,39 @@ public class Task {
         return Information.getDatabase().child("Supervisor").child(Utils.parentName).child(Utils.EmailAdress.replace(".", "*"));
     }
 
-    public ArrayList<Task>SortTaskbyDate(ArrayList<Task>task)
-    {
-
-
-
-        for (int j= 0 ;j<(task.size()-1);j++) {
-            for (int i = 0; i < task.size() - 1; i++)
-
-            {
-
-                SimpleDateFormat sdf = new SimpleDateFormat("dd-mm-yyyy hh:mm ");
-                try {
-                    if (sdf.parse(task.get(i).time_task.toString()).after(sdf.parse(task.get(i + 1).time_task.toString())))
-
-                    {
-                        Task temp = new Task();
-
-                        temp = task.get(i + 1);
-                        task.set(i + 1, task.get(i));
-                        task.set(i, temp);
-                    }
-
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-
-
-
-            }
-        }
-
-
-        return task ;
-    }
+//    public ArrayList<Task>SortTaskbyDate(ArrayList<Task>task)
+//    {
+//
+//
+//
+//        for (int j= 0 ;j<(task.size()-1);j++) {
+//            for (int i = 0; i < task.size() - 1; i++)
+//
+//            {
+//
+//                SimpleDateFormat sdf = new SimpleDateFormat("dd-mm-yyyy hh:mm ");
+//                try {
+//                    if (sdf.parse(task.get(i).time_task.toString()).after(sdf.parse(task.get(i + 1).time_task.toString())))
+//
+//                    {
+//                        Task temp = new Task();
+//
+//                        temp = task.get(i + 1);
+//                        task.set(i + 1, task.get(i));
+//                        task.set(i, temp);
+//                    }
+//
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
+//
+//
+//
+//            }
+//        }
+//
+//
+//        return task ;
+//    }
 
 }

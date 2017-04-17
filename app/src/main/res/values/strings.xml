@@ -16,11 +16,12 @@
     <string name="Rate_Em_pro">Rate</string>
 
     <string-array name="sorttype">
-        <item>Filter</item>
+        <item>All</item>
         <item>complete</item>
-        <item>incomplete</item>
-        <item>proceesing</item>
-        <item>on The Way</item>
+        <item>On_The_Way</item>
+        <item>PROCESSING</item>
+        <item>INCOMPLETE</item>
+        <item>CANCEL</item>
 
 
 
