@@ -1,5 +1,7 @@
 package pharmaproject.ahmed.example.packagecom.pharmaproject_employee;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+import pharmaproject.ahmed.example.packagecom.pharmaproject_employee.database.Information;
 import pharmaproject.ahmed.example.packagecom.pharmaproject_employee.database.Task;
 import pharmaproject.ahmed.example.packagecom.pharmaproject_employee.database.TaskType;
 import pharmaproject.ahmed.example.packagecom.pharmaproject_employee.helper.Utils;
@@ -7,6 +9,8 @@ import pharmaproject.ahmed.example.packagecom.pharmaproject_employee.helper.Util
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -30,7 +34,7 @@ public class task extends Fragment implements OnMapReadyCallback {
     TextView typeTask;
     SeekBar seekbar;
     MapView mapview;
-    ImageView feedback,prepare_endtask;
+    ImageView feedback,prepare_endtask,canceltask;
     int id;
     Task taskEmployee=new Task();
     //map part
@@ -50,6 +54,7 @@ public class task extends Fragment implements OnMapReadyCallback {
         mapview= (MapView) view.findViewById(R.id.scrollInfo);
         feedback= (ImageView) view.findViewById(R.id.feedback);
         prepare_endtask= (ImageView) view.findViewById(R.id.prepare_endtask);
+        canceltask = (ImageView) view.findViewById(R.id.cancel_task);
 
         doctorName.setTypeface(pharmaproject.ahmed.example.packagecom.pharmaproject_employee.helper.Utils.getFont(getActivity()));
         address.setTypeface(pharmaproject.ahmed.example.packagecom.pharmaproject_employee.helper.Utils.getFont(getActivity()));
@@ -93,16 +98,52 @@ public class task extends Fragment implements OnMapReadyCallback {
                 }
             }
         });
+        canceltask.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                createdialog();
+
+            }
+        });
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         taskEmployee.getTask
                 (Utils.EmailAdress.replace(".","*"),id,doctorName,address,taskTime,taskDescription,seekbar,
-                        typeTask,googleMap,getActivity(),feedback,prepare_endtask);
+                        typeTask,googleMap,getActivity(),feedback,prepare_endtask, canceltask);
         mapView.onResume();
     }
 
+    public void createdialog() {
 
+
+        new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE)
+                .setTitleText("Are you sure?")
+                .setContentText("You are going to cancel task!")
+                .setCancelText("No !")
+                .setConfirmText("Yes")
+                .showCancelButton(true)
+                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sDialog) {
+                        sDialog.cancel();
+                    }
+                })
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+
+
+                        taskEmployee.updateStatus(TaskType.CANCEL,id,getActivity());
+                        canceltask.setVisibility(View.GONE);
+                        sweetAlertDialog.dismiss();
+
+
+                    }
+                })
+                .show();
+
+    }
 
 }

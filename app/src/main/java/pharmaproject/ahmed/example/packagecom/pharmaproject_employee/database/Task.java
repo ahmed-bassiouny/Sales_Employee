@@ -78,6 +78,10 @@ public class Task {
 
 
     public void updateStatus(final TaskType taskType, final int id_task, final FragmentActivity fragmentActivity) {
+        if (taskType==TaskType.CANCEL) {
+            getRoot().
+                    child(id_task + "").child("taskType").setValue(taskType);
+        }
         locationManager = (LocationManager) fragmentActivity.getSystemService(Context.LOCATION_SERVICE);
         LocationListener locationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
@@ -172,7 +176,7 @@ public class Task {
                         final EditText Task_Desc,
                         final SeekBar typetaskbar, final TextView typetasktxt,
                         final GoogleMap mapView, final FragmentActivity fragmentActivity,
-                        final ImageView feedbackimg,final ImageView prepare_endtask){
+                        final ImageView feedbackimg,final ImageView prepare_endtask,final ImageView canceltask){
         helper=new MyHelper(fragmentActivity);
         ValueEventListener postListener = new ValueEventListener() {
             @Override
@@ -203,11 +207,13 @@ public class Task {
                         typetaskbar.setProgress(3);
                         typetasktxt.setText("COMPLETE");
                         prepare_endtask.setVisibility(View.INVISIBLE);
+                        canceltask.setVisibility(View.GONE);
                         break;
                     case CANCEL:
                         typetaskbar.setProgress(0);
                         typetasktxt.setText("CANCEL");
                         prepare_endtask.setVisibility(View.INVISIBLE);
+                        canceltask.setVisibility(View.GONE);
                     default:
                 }
                 feedbackimg.setOnClickListener(new View.OnClickListener() {

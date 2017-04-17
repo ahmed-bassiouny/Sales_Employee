@@ -121,7 +121,15 @@
         android:layout_margin="30dp"
         android:background="@drawable/border"
         android:orientation="horizontal"
-        android:weightSum="2">
+        android:weightSum="3">
+        <ImageView
+            android:id="@+id/cancel_task"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:saveEnabled="false"
+            android:src="@drawable/ph_cancel_task"
+            />
 
         <ImageView
             android:id="@+id/prepare_endtask"
@@ -140,6 +148,8 @@
             android:layout_weight="1"
             android:saveEnabled="false"
             android:src="@drawable/ph_feedback" />
+
+
     </LinearLayout>
 
 
