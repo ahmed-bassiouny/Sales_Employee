@@ -260,4 +260,11 @@ public class ListOfTasks extends Fragment implements AdapterView.OnItemSelectedL
             task=new Task();
         task.getTasks(recyclerView,getActivity(), Email,MyHelper.getProgress(getActivity()),taskTypeselected,noTaskfound);
     }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+       task.removeListener(Utils.EmailAdress);
+    }
 }

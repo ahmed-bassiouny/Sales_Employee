@@ -146,4 +146,10 @@ public class task extends Fragment implements OnMapReadyCallback {
 
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        taskEmployee.removeListener(Utils.EmailAdress);
+    }
 }

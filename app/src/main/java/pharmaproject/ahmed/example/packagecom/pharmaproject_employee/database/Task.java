@@ -74,6 +74,7 @@ public class Task {
     private int numberOfTasks;
     private MyHelper helper;
     private LocationManager locationManager;
+    ValueEventListener postListener;
 
 
 
@@ -127,7 +128,7 @@ public class Task {
     }
 
     public void getTasks(final RecyclerView recyclerView, final FragmentActivity fragmentActivity, final String email, final ProgressDialog progressDialog, @Nullable final TaskType fiteroftasks,final TextView noTeskfound){
-        ValueEventListener postListener = new ValueEventListener() {
+         postListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 final ArrayList<Task> tasks = new ArrayList<>();
@@ -178,7 +179,7 @@ public class Task {
                         final GoogleMap mapView, final FragmentActivity fragmentActivity,
                         final ImageView feedbackimg,final ImageView prepare_endtask,final ImageView canceltask){
         helper=new MyHelper(fragmentActivity);
-        ValueEventListener postListener = new ValueEventListener() {
+        /*ValueEventListener*/ postListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 final Task task = dataSnapshot.child("Supervisor").child(Utils.parentName).child(email).child(task_id+"").getValue(Task.class);
@@ -298,5 +299,10 @@ public class Task {
 //
 //        return task ;
 //    }
+
+//
+    public void removeListener(String id_employee){
+        Information.getDatabase().child("Supervisor").child(Utils.parentName).child(id_employee).removeEventListener(postListener);
+   }
 
 }
