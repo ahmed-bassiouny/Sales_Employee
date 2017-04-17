@@ -28,7 +28,8 @@
              android:text="No task found"
             android:visibility="gone"
              android:id="@+id/notaskfound"
-             android:layout_marginLeft="100dp"
+             android:layout_marginLeft="120dp"
+             android:textSize="20dp"
                 />
 
          <android.support.v7.widget.RecyclerView

@@ -155,8 +155,8 @@ public class Task {
                     recyclerView.setItemAnimator(new DefaultItemAnimator());
                     recyclerView.setAdapter(adapter_tasks);
                 }else{
-                    Debuger.Toast(fragmentActivity,"No Tasks Found");
-                    //noTeskfound.setVisibility(View.VISIBLE);
+                   // Debuger.Toast(fragmentActivity,"No Tasks Found");
+                    noTeskfound.setVisibility(View.VISIBLE);
                     recyclerView.setVisibility(View.GONE);
                 }
                 progressDialog.dismiss();
